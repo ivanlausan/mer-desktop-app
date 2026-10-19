@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Configurar sincronización</title>
+<style>
+*{box-sizing:border-box}body{margin:0;padding:30px;background:#f5f8f5;color:#26362c;font:14px "Segoe UI",Arial,sans-serif}main{background:white;border:1px solid #dce4de;border-radius:14px;padding:24px;box-shadow:0 10px 30px #23382a12}h1{margin:0 0 8px;font-size:21px}p{color:#6d7a71;line-height:1.55}.label{display:block;margin:20px 0 7px;font-weight:600;font-size:12px}.input{width:100%;padding:11px;border:1px solid #cfdad2;border-radius:8px;font:inherit}.button{margin-top:18px;border:0;border-radius:8px;background:#367a5c;color:white;font-weight:700;padding:11px 16px;cursor:pointer}.status{min-height:22px;color:#a3483e;font-size:12px;margin-top:12px}.hint{font-size:11px}
+</style></head><body><main><h1>Conectar modelos entre ordenadores</h1><p>Configura la URL HTTPS del servicio compartido. Se guarda en este ordenador; los modelos seguirán almacenados en el servidor.</p><form id="form"><label class="label" for="url">URL del servicio</label><input class="input" id="url" type="url" placeholder="https://mer.ejemplo.com" required><p class="hint">El administrador del servicio debe autorizar el origen de escritorio <code>merapp://app</code>. Para pruebas locales también se admite <code>http://localhost:3000</code>.</p><button class="button" type="submit">Guardar y abrir la aplicación</button><div class="status" id="status"></div></form></main>
+<script>
+const input=document.getElementById('url'),status=document.getElementById('status');
+input.value=window.merDesktop.apiBase||'';
+document.getElementById('form').addEventListener('submit',async event=>{event.preventDefault();status.textContent='';try{await window.merDesktop.saveApiBase(input.value)}catch(error){status.textContent=error.message||'No se pudo guardar la dirección.'}});
+</script></body></html>

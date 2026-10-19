@@ -1,0 +1,96 @@
+{
+  "name": "disenador-mer-desktop",
+  "version": "1.1.0",
+  "description": "Aplicación de escritorio del Diseñador MER",
+  "main": "main.js",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win nsis --x64",
+    "dist:win:arm64": "electron-builder --win nsis --arm64",
+    "dist:mac": "electron-builder --mac dmg zip --x64 --arm64",
+    "dist:linux": "electron-builder --linux AppImage deb --x64",
+    "dist:linux:arm64": "electron-builder --linux AppImage deb --arm64",
+    "dist": "electron-builder",
+    "dist:win:zip": "electron-builder --win zip --x64"
+  },
+  "devDependencies": {
+    "electron": "44.9.0",
+    "electron-builder": "26.0.12"
+  },
+  "build": {
+    "appId": "com.forma.disenadormer",
+    "productName": "Diseñador MER",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "setup.html",
+      "public/**/*"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "category": "Office",
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    }
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}
